@@ -17,7 +17,7 @@ import kotlin.io.path.name
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
-open class ScaffoldBothTask : DefaultTask() {
+open class ScaffoldBothTask : DefaultTask(){
 
     @get:Input @get:Optional var nameOpt: String? = null
     @get:Input @get:Optional var packageOpt: String? = null
@@ -44,26 +44,26 @@ open class ScaffoldBothTask : DefaultTask() {
 
     @TaskAction
     fun run() {
-        val pluginName = normalizeToWords(nameOpt
+        val pluginName = TextTransformUtils.normalizeToWords(nameOpt
             ?: project.findProperty("scaffold.pluginName") as String?
             ?: error("Missing plugin name. Use: ./gradlew scaffoldPlugin --name DemoPlugin")
                 )
 
         val artifact = artifactOpt
             ?: project.findProperty("scaffold.artifact") as String?
-            ?: toKebabCase(pluginName)
+            ?: TextTransformUtils.toKebabCase(pluginName)
 
         val pkg = packageOpt
             ?: project.findProperty("scaffold.package") as String?
-            ?: "com.ritense.${toFlatCase(pluginName)}"
+            ?: "com.ritense.${TextTransformUtils.toFlatCase(pluginName)}"
 
         val classPrefix = classPrefixOpt
             ?: project.findProperty("scaffold.classPrefix") as String?
-            ?: toPascalCase(pluginName)
+            ?: TextTransformUtils.toPascalCase(pluginName)
 
         val functionPrefix = functionPrefixOpt
             ?: project.findProperty("scaffold.functionPrefix") as String?
-            ?: toCamelCase(pluginName)
+            ?: TextTransformUtils.toCamelCase(pluginName)
 
         failIfExists = (project.findProperty("scaffold.failIfExists") as String?)?.toBooleanStrictOrNull() ?: true
 
@@ -121,58 +121,6 @@ open class ScaffoldBothTask : DefaultTask() {
         }
     }
 
-    fun toFlatCase(input: String): String {
-        return input
-            // Remove separators (dot, dash, slash, underscore, space)
-            .replace(Regex("[._\\-/\\s]+"), "")
-            // Insert a marker before capitals, then lowercase everything
-            .replace(Regex("([a-z0-9])([A-Z])"), "$1$2")
-            .lowercase()
-    }
-
-    fun normalizeToWords(input: String): String {
-        return input
-            // Replace separators (dot, dash, slash, underscore) with space
-            .replace(Regex("[._\\-/]+"), " ")
-            // Insert space before capital letters (except at start)
-            .replace(Regex("([a-z0-9])([A-Z])"), "$1 $2")
-            // Normalize spacing and lowercase
-            .trim()
-            .lowercase()
-    }
-
-    private fun toKebabCase(input: String): String {
-        return input
-            // split camelCase and PascalCase
-            .replace(Regex("([a-z0-9])([A-Z])"), "$1-$2")
-            // split ALLCAPS followed by normal word (e.g. "HTMLParser" → "HTML-Parser")
-            .replace(Regex("([A-Z])([A-Z][a-z])"), "$1-$2")
-            // normalize underscores, spaces, multiple dashes into single dash
-            .replace(Regex("[\\s_]+"), "-")
-            .replace(Regex("-+"), "-")
-            // lowercase everything
-            .lowercase(Locale.getDefault())
-            // trim accidental leading/trailing dashes
-            .trim('-')
-    }
-    private fun toPascalCase(input: String): String {
-        return input
-            .split('_', '-', ' ')
-            .filter { it.isNotBlank() }
-            .joinToString("") { part ->
-                part.lowercase().replaceFirstChar { it.uppercase() }
-            }
-    }
-
-    fun toCamelCase(input: String): String {
-        val parts = input
-            .split('_', '-', ' ')
-            .filter { it.isNotBlank() }
-            .map { it.lowercase() }
-
-        return parts.first() + parts.drop(1)
-            .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
-    }
 
     private fun resolvePathTokens(path: String, tokens: Map<String, String>): String {
         var out = path
