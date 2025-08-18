@@ -1,0 +1,11 @@
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = "__ARTIFACT_NAME__"
+            pom {
+                name = "__ARTIFACT_NAME__"
+                description = "__ARTIFACT_NAME__"
+            }
+        }
+    }
+}
