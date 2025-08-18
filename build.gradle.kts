@@ -24,6 +24,9 @@ plugins {
     // Other
     id("com.avast.gradle.docker-compose")
     id("cn.lalaki.central") version "1.2.5"
+
+    id("com.ritense.scaffold")
+
 }
 
 allprojects {
