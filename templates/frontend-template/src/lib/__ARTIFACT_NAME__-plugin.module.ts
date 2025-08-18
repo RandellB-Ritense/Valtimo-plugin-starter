@@ -2,11 +2,11 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {PluginTranslatePipeModule} from '@valtimo/plugin';
 import {FormModule, InputModule, ParagraphModule, SelectModule} from '@valtimo/components';
-import {__PLUGIN_NAME__PluginConfigurationComponent} from './components/__ARTIFACT_NAME__-plugin-configuration/__ARTIFACT_NAME__-plugin-configuration.component';
+import {__CLASS_PREFIX__PluginConfigurationComponent} from './components/__ARTIFACT_NAME__-plugin-configuration/__ARTIFACT_NAME__-plugin-configuration.component';
 
 @NgModule({
   declarations: [
-    __PLUGIN_NAME__PluginConfigurationComponent
+      __CLASS_PREFIX__PluginConfigurationComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +17,7 @@ import {__PLUGIN_NAME__PluginConfigurationComponent} from './components/__ARTIFA
     ParagraphModule
   ],
   exports: [
-      __PLUGIN_NAME__PluginConfigurationComponent
+      __CLASS_PREFIX__PluginConfigurationComponent
   ]
 })
 export class __CLASS_PREFIX__PluginModule {}

@@ -1,16 +1,17 @@
 import {PluginSpecification} from '@valtimo/plugin';
 import {__CLASS_PREFIX__PluginConfigurationComponent} from './components/__ARTIFACT_NAME__-plugin-configuration/__ARTIFACT_NAME__-plugin-configuration.component';
+import {PLUGIN_LOGO_BASE64} from "./assets";
 
-const __ARTIFACT_NAME__PluginSpecification: PluginSpecification = {
+const __FUNCTION_PREFIX__PluginSpecification: PluginSpecification = {
   pluginId: '__ARTIFACT_NAME__',
   pluginConfigurationComponent: __CLASS_PREFIX__PluginConfigurationComponent,
-  pluginLogoBase64: undefined,
+  pluginLogoBase64: PLUGIN_LOGO_BASE64,
   functionConfigurationComponents: {
     'sample-action': __CLASS_PREFIX__PluginConfigurationComponent
   },
   pluginTranslations: {
     nl: {
-      configurationTitle: 'Configuratie naam',
+      configurationTitle: '__PLUGIN_NAME__',
       configurationTitleTooltip: 'Voorbeeld plugin',
       title: 'Voorbeeld plugin',
       description: 'Boilerplate plugin voor configuratie',
@@ -19,7 +20,7 @@ const __ARTIFACT_NAME__PluginSpecification: PluginSpecification = {
       'sample-action': 'Voorbeeld actie'
     },
     en: {
-      configurationTitle: 'Configuration name',
+      configurationTitle: '__PLUGIN_NAME__',
       configurationTitleTooltip: 'Example plugin',
       title: 'Example plugin',
       description: 'Boilerplate plugin for configuration',
@@ -30,4 +31,4 @@ const __ARTIFACT_NAME__PluginSpecification: PluginSpecification = {
   }
 };
 
-export {__ARTIFACT_NAME__PluginSpecification};
+export {__FUNCTION_PREFIX__PluginSpecification};

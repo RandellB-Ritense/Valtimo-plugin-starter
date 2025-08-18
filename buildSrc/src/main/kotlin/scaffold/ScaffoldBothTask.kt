@@ -22,7 +22,7 @@ open class ScaffoldBothTask : DefaultTask() {
     @get:Input @get:Optional var nameOpt: String? = null
     @get:Input @get:Optional var packageOpt: String? = null
     @get:Input @get:Optional var classPrefixOpt: String? = null
-    @get:Input @get:Optional var pluginIdOpt: String? = null
+    @get:Input @get:Optional var functionPrefixOpt: String? = null
     @get:Input @get:Optional var artifactOpt: String? = null
     @get:Input var failIfExists: Boolean = true
 
@@ -35,33 +35,35 @@ open class ScaffoldBothTask : DefaultTask() {
     @Option(option = "classPrefix", description = "Class prefix, defaults to --name")
     fun setClassPrefixOption(v: String) { classPrefixOpt = v }
 
-    @Option(option = "pluginId", description = "Plugin ID, defaults to com.ritense.<artifact>")
-    fun setPluginIdOption(v: String) { pluginIdOpt = v }
+    @Option(option = "functionPrefix", description = "Function prefix, defaults to --name")
+    fun setFunctionPrefixOption(v: String) { functionPrefixOpt = v }
+
 
     @Option(option = "artifact", description = "Artifact (kebab-case), defaults from --name")
     fun setArtifactOption(v: String) { artifactOpt = v }
 
     @TaskAction
     fun run() {
-        val pluginName = nameOpt
+        val pluginName = normalizeToWords(nameOpt
             ?: project.findProperty("scaffold.pluginName") as String?
             ?: error("Missing plugin name. Use: ./gradlew scaffoldPlugin --name DemoPlugin")
+                )
 
         val artifact = artifactOpt
             ?: project.findProperty("scaffold.artifact") as String?
-            ?: toKebabFromCamel(pluginName)
+            ?: toKebabCase(pluginName)
 
         val pkg = packageOpt
             ?: project.findProperty("scaffold.package") as String?
-            ?: "com.ritense.$artifact"
+            ?: "com.ritense.${toFlatCase(pluginName)}"
 
         val classPrefix = classPrefixOpt
             ?: project.findProperty("scaffold.classPrefix") as String?
-            ?: pluginName
+            ?: toPascalCase(pluginName)
 
-        val pluginId = pluginIdOpt
-            ?: project.findProperty("scaffold.pluginId") as String?
-            ?: "com.ritense.$artifact"
+        val functionPrefix = functionPrefixOpt
+            ?: project.findProperty("scaffold.functionPrefix") as String?
+            ?: toCamelCase(pluginName)
 
         failIfExists = (project.findProperty("scaffold.failIfExists") as String?)?.toBooleanStrictOrNull() ?: true
 
@@ -69,9 +71,9 @@ open class ScaffoldBothTask : DefaultTask() {
             "__PACKAGE_NAME__" to pkg,
             "__PACKAGE_PATH__" to pkg.replace('.', '/'),
             "__PLUGIN_NAME__" to pluginName,
-            "__PLUGIN_ID__" to pluginId,
             "__ARTIFACT_NAME__" to artifact,
-            "__CLASS_PREFIX__" to classPrefix
+            "__CLASS_PREFIX__" to classPrefix,
+            "__FUNCTION_PREFIX__" to functionPrefix
         )
 
         val backendTemplate = (project.findProperty("scaffold.templateBackend") as String?) ?: "templates/backend-template"
@@ -98,7 +100,7 @@ open class ScaffoldBothTask : DefaultTask() {
         )
 
         val autoIncludeBackend = (project.findProperty("scaffold.autoIncludeBackend") as String?)
-            ?.toBooleanStrictOrNull() ?: false
+            ?.toBooleanStrictOrNull() ?: true
         if (autoIncludeBackend) {
             val includeLine = "include(\":backend:$artifact\")"
             val settings = project.layout.projectDirectory.file("settings.gradle.kts").asFile.toPath()
@@ -113,12 +115,64 @@ open class ScaffoldBothTask : DefaultTask() {
 
         logger.lifecycle("Scaffolded backend -> $backendOutput")
         logger.lifecycle("Scaffolded frontend -> $frontendOutput")
+        logger.lifecycle("Resolved scaffold tokens:")
+        tokens.forEach { (k, v) ->
+            logger.lifecycle("  $k -> $v")
+        }
     }
 
-    private fun toKebabFromCamel(s: String): String =
-        s.replace(Regex("([a-z0-9])([A-Z])"), "$1-$2")
+    fun toFlatCase(input: String): String {
+        return input
+            // Remove separators (dot, dash, slash, underscore, space)
+            .replace(Regex("[._\\-/\\s]+"), "")
+            // Insert a marker before capitals, then lowercase everything
+            .replace(Regex("([a-z0-9])([A-Z])"), "$1$2")
+            .lowercase()
+    }
+
+    fun normalizeToWords(input: String): String {
+        return input
+            // Replace separators (dot, dash, slash, underscore) with space
+            .replace(Regex("[._\\-/]+"), " ")
+            // Insert space before capital letters (except at start)
+            .replace(Regex("([a-z0-9])([A-Z])"), "$1 $2")
+            // Normalize spacing and lowercase
+            .trim()
+            .lowercase()
+    }
+
+    private fun toKebabCase(input: String): String {
+        return input
+            // split camelCase and PascalCase
+            .replace(Regex("([a-z0-9])([A-Z])"), "$1-$2")
+            // split ALLCAPS followed by normal word (e.g. "HTMLParser" → "HTML-Parser")
+            .replace(Regex("([A-Z])([A-Z][a-z])"), "$1-$2")
+            // normalize underscores, spaces, multiple dashes into single dash
             .replace(Regex("[\\s_]+"), "-")
+            .replace(Regex("-+"), "-")
+            // lowercase everything
             .lowercase(Locale.getDefault())
+            // trim accidental leading/trailing dashes
+            .trim('-')
+    }
+    private fun toPascalCase(input: String): String {
+        return input
+            .split('_', '-', ' ')
+            .filter { it.isNotBlank() }
+            .joinToString("") { part ->
+                part.lowercase().replaceFirstChar { it.uppercase() }
+            }
+    }
+
+    fun toCamelCase(input: String): String {
+        val parts = input
+            .split('_', '-', ' ')
+            .filter { it.isNotBlank() }
+            .map { it.lowercase() }
+
+        return parts.first() + parts.drop(1)
+            .joinToString("") { it.replaceFirstChar { c -> c.uppercase() } }
+    }
 
     private fun resolvePathTokens(path: String, tokens: Map<String, String>): String {
         var out = path
