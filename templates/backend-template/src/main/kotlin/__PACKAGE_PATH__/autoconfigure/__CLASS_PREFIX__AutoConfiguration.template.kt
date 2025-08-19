@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @EnableConfigurationProperties
-class __CLASS_PREFIX__AutoConfiguration {
+class `__CLASS_PREFIX__AutoConfiguration.template` {
 
     @Bean
     fun pluginFactory(

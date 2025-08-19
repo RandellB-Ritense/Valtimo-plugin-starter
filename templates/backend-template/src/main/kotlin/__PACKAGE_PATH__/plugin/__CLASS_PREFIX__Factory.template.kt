@@ -3,7 +3,7 @@ package __PACKAGE_NAME__.plugin
 import com.ritense.plugin.PluginFactory
 import com.ritense.plugin.service.PluginService
 
-class __CLASS_PREFIX__Factory(
+class `__CLASS_PREFIX__Factory.template`(
     pluginService: PluginService
 ) : PluginFactory<__CLASS_PREFIX__>(pluginService) {
 

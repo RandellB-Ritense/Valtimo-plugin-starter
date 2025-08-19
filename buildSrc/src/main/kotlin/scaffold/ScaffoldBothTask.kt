@@ -103,9 +103,14 @@ open class ScaffoldBothTask : DefaultTask(){
 
         logger.lifecycle("Scaffolded backend -> $backendOutput")
         logger.lifecycle("Scaffolded frontend -> $frontendOutput")
-        logger.lifecycle("Resolved scaffold tokens:")
-        tokens.forEach { (k, v) ->
-            logger.lifecycle("  $k -> $v")
-        }
+        logger.lifecycle("""
+             _____ _____      _             _       
+            | ____|__  /_ __ | |_   _  __ _(_)_ __  
+            |  _|   / /| '_ \| | | | |/ _` | | '_ \ 
+            | |___ / /_| |_) | | |_| | (_| | | | | |
+            |_____/____| .__/|_|\__,_|\__, |_|_| |_|
+                       |_|            |___/      
+        """.trimIndent())
+        logger.lifecycle("Plugin scaffolding complete, happy coding!")
     }
 }

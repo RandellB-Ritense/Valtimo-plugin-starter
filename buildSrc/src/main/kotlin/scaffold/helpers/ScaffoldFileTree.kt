@@ -43,7 +43,8 @@ object ScaffoldFileTree {
                     val replaced = replaceTokens(seg.toString())
                     renamedRel = if (renamedRel.toString().isEmpty()) Path.of(replaced) else renamedRel.resolve(replaced)
                 }
-                val dest = outputDir.resolve(renamedRel)
+                val finalRel = if (!src.isDirectory()) stripTemplateSuffix(renamedRel) else renamedRel
+                val dest = outputDir.resolve(finalRel)
                 if (src.isDirectory()) {
                     dest.createDirectories()
                 } else {
@@ -78,5 +79,15 @@ object ScaffoldFileTree {
             "kt","kts","java","md","gradle","properties","yaml","yml","xml","json","txt","gitignore",
             "ts","tsx","js","mjs","cjs","html","css","scss","less","env","npmrc","nvmrc","eslintrc","prettierrc","svg"
         )
+    }
+
+    fun stripTemplateSuffix(path: Path): Path {
+        val fileName = path.fileName.toString()
+        val stripped = if (fileName.endsWith(".template")) {
+            fileName.removeSuffix(".template")
+        } else {
+            fileName
+        }
+        return path.parent?.resolve(stripped) ?: Path.of(stripped)
     }
 }

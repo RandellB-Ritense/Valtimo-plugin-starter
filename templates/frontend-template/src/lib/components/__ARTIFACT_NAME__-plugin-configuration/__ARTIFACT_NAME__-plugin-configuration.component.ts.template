@@ -2,13 +2,13 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {PluginConfigurationComponent, PluginManagementService, PluginTranslationService} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, map, Observable, Subscription, take} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import {Config} from "../../models";
+import {Config} from "../../models/index.ts.template";
 
 
 @Component({
     selector: 'valtimo-__ARTIFACT_NAME__-plugin-configuration',
-    templateUrl: './__ARTIFACT_NAME__-plugin-configuration.component.html',
-    styleUrls: ['./__ARTIFACT_NAME__-plugin-configuration.component.scss']
+    templateUrl: './__ARTIFACT_NAME__-plugin-configuration.component.html.template',
+    styleUrls: ['./__ARTIFACT_NAME__-plugin-configuration.component.scss.template']
 })
 export class __CLASS_PREFIX__PluginConfigurationComponent implements PluginConfigurationComponent, OnInit, OnDestroy {
     @Input() save$: Observable<void>;

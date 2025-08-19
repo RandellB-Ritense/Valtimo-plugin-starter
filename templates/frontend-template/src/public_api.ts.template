@@ -1,0 +1,6 @@
+// TypeScript
+// @ts-nocheck
+export * from './lib/__ARTIFACT_NAME__-plugin-module.ts.template';
+export * from './lib/__ARTIFACT_NAME__-plugin.specification.ts.template';
+export *
+    from './lib/components/__ARTIFACT_NAME__-plugin-configuration/__ARTIFACT_NAME__-plugin-configuration.component.ts.template';
