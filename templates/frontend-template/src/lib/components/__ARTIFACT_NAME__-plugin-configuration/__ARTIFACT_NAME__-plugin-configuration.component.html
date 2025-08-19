@@ -6,33 +6,23 @@
     } as obs"
 >
     <v-input
-            name="configurationTitle"
-            [title]="'configurationTitle' | pluginTranslate: pluginId | async"
-            [margin]="true"
-            [fullWidth]="true"
             [defaultValue]="obs.prefill?.configurationTitle"
             [disabled]="obs.disabled"
+            [fullWidth]="true"
+            [margin]="true"
             [required]="true"
+            [title]="'configurationTitle' | pluginTranslate: pluginId | async"
+            name="configurationTitle"
     >
     </v-input>
     <v-input
-            name="exampleProperty"
-            [title]="'exampleProperty' | pluginTranslate: pluginId | async"
-            [margin]="true"
-            [fullWidth]="true"
             [defaultValue]="obs.prefill?.exampleProperty"
             [disabled]="obs.disabled"
-            [required]="true"
-    >
-    </v-input>
-    <v-input
-            name="baseUrl"
-            [title]="'baseUrl' | pluginTranslate: pluginId | async"
-            [margin]="true"
             [fullWidth]="true"
-            [defaultValue]="obs.prefill?.baseUrl"
-            [disabled]="obs.disabled"
+            [margin]="true"
             [required]="true"
+            [title]="'exampleProperty' | pluginTranslate: pluginId | async"
+            name="exampleProperty"
     >
     </v-input>
 </v-form>

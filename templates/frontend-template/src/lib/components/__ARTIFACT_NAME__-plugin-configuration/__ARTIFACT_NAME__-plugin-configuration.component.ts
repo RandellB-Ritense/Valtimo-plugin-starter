@@ -6,46 +6,44 @@ import {Config} from "../../models";
 
 
 @Component({
-  selector: 'valtimo-__ARTIFACT_NAME__-plugin-configuration',
-  templateUrl: './__ARTIFACT_NAME__-plugin-configuration.component.html',
-  styleUrls: ['./__ARTIFACT_NAME__-plugin-configuration.component.scss']
+    selector: 'valtimo-__ARTIFACT_NAME__-plugin-configuration',
+    templateUrl: './__ARTIFACT_NAME__-plugin-configuration.component.html',
+    styleUrls: ['./__ARTIFACT_NAME__-plugin-configuration.component.scss']
 })
 export class __CLASS_PREFIX__PluginConfigurationComponent implements PluginConfigurationComponent, OnInit, OnDestroy {
-  @Input() save$: Observable<void>;
-  @Input() disabled$: Observable<boolean>;
-  @Input() pluginId: string;
-  @Input() prefillConfiguration$: Observable<Config>;
+    @Input() save$: Observable<void>;
+    @Input() disabled$: Observable<boolean>;
+    @Input() pluginId: string;
+    @Input() prefillConfiguration$: Observable<Config>;
 
 
-  @Output() valid: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() configuration: EventEmitter<Config> = new EventEmitter<Config>();
+    @Output() valid: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() configuration: EventEmitter<Config> = new EventEmitter<Config>();
+    readonly authenticationPluginSelectItems$: Observable<Array<{ id: string; text: string }>> =
+        combineLatest([
+            this.pluginManagementService.getPluginConfigurationsByCategory('__ARTIFACT_NAME__-plugin-template'),
+            this.translateService.stream('key'),
+        ]).pipe(
+            map(([configurations]) =>
+                configurations.map(configuration => ({
+                    id: configuration.id,
+                    text: `${configuration.title} - ${this.pluginTranslationService.instant(
+                        'title',
+                        configuration.pluginDefinition.key
+                    )}`,
+                }))
+            )
+        );
+    private saveSubscription!: Subscription;
+    private readonly formValue$ = new BehaviorSubject<Config | null>(null);
+    private readonly valid$ = new BehaviorSubject<boolean>(false);
 
-  private saveSubscription!: Subscription;
-
-  private readonly formValue$ = new BehaviorSubject<Config | null>(null);
-  private readonly valid$ = new BehaviorSubject<boolean>(false);
-
-  readonly authenticationPluginSelectItems$: Observable<Array<{ id: string; text: string }>> =
-    combineLatest([
-      this.pluginManagementService.getPluginConfigurationsByCategory('__ARTIFACT_NAME__-plugin-template'),
-      this.translateService.stream('key'),
-    ]).pipe(
-      map(([configurations]) =>
-        configurations.map(configuration => ({
-          id: configuration.id,
-          text: `${configuration.title} - ${this.pluginTranslationService.instant(
-            'title',
-            configuration.pluginDefinition.key
-          )}`,
-        }))
-      )
-    );
-
-  constructor(
-    private readonly pluginManagementService: PluginManagementService,
-    private readonly translateService: TranslateService,
-    private readonly pluginTranslationService: PluginTranslationService
-  ) {}
+    constructor(
+        private readonly pluginManagementService: PluginManagementService,
+        private readonly translateService: TranslateService,
+        private readonly pluginTranslationService: PluginTranslationService
+    ) {
+    }
 
     ngOnInit(): void {
         this.openSaveSubscription();
@@ -56,31 +54,29 @@ export class __CLASS_PREFIX__PluginConfigurationComponent implements PluginConfi
     }
 
 
-  formValueChange(formValue: Config): void {
-    this.formValue$.next(formValue);
-    this.handleValid(formValue);
-  }
+    formValueChange(formValue: Config): void {
+        this.formValue$.next(formValue);
+        this.handleValid(formValue);
+    }
 
-  private handleValid(formValue: Config): void {
-    const valid = !!(
-      formValue.configurationTitle &&
-      formValue.exampleProperty &&
-      formValue.baseUrl
-    );
+    private handleValid(formValue: Config): void {
+        const valid = !!(
+            formValue.configurationTitle &&
+            formValue.exampleProperty);
 
-    this.valid$.next(valid);
-    this.valid.emit(valid);
-  }
+        this.valid$.next(valid);
+        this.valid.emit(valid);
+    }
 
-  private openSaveSubscription(): void {
-    this.saveSubscription = this.save$?.subscribe(() => {
-      combineLatest([this.formValue$, this.valid$])
-        .pipe(take(1))
-        .subscribe(([formValue, valid]) => {
-          if (valid) {
-            this.configuration.emit(formValue);
-          }
+    private openSaveSubscription(): void {
+        this.saveSubscription = this.save$?.subscribe(() => {
+            combineLatest([this.formValue$, this.valid$])
+                .pipe(take(1))
+                .subscribe(([formValue, valid]) => {
+                    if (valid) {
+                        this.configuration.emit(formValue);
+                    }
+                });
         });
-    });
-  }
+    }
 }

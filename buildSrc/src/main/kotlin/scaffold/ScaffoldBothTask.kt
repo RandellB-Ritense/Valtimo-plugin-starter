@@ -95,17 +95,7 @@ open class ScaffoldBothTask : DefaultTask(){
             failIfExists = failIfExists
         )
 
-//        // Register backend plugin
-//        val includeLine = "include(\":backend:$artifact\")"
-//        val settings = project.layout.projectDirectory.file("settings.gradle.kts").asFile.toPath()
-//        if (Files.exists(settings)) {
-//            val current = settings.readText()
-//            if (!current.lineSequence().any { it.trim() == includeLine }) {
-//                settings.writeText(current + System.lineSeparator() + includeLine + System.lineSeparator())
-//                logger.lifecycle("Appended include to settings.gradle.kts: $includeLine")
-//            }
-//        }
-
+        // Register backend plugin
         ScaffoldPluginRegistrarBackend.addBackendModule(project.layout.projectDirectory.file("settings.gradle.kts").asFile.toPath(), artifact)
 
         // Register frontend plugin

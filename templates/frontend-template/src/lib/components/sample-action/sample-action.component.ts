@@ -15,11 +15,8 @@
  */
 
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FunctionConfigurationComponent, PluginTranslatePipeModule} from '@valtimo/plugin';
-import {CarbonMultiInputComponent} from '@valtimo/components';
+import {FunctionConfigurationComponent} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, Observable, Subscription, take} from 'rxjs';
-import {AsyncPipe, NgIf} from '@angular/common';
-import {FormModule, InputModule} from '@valtimo/components';
 import {SampleActionConfig} from '../../models';
 
 @Component({

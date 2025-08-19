@@ -6,7 +6,7 @@ import org.gradle.kotlin.dsl.register
 
 class ScaffoldPlugin : Plugin<Project> {
     override fun apply(project: Project) {
-        project.tasks.register<ScaffoldBothTask>("scaffoldPlugin") {
+        project.tasks.register<ScaffoldBothTask>("EZplugin") {
             group = "scaffold"
             description = "Scaffold backend and frontend with --name; package defaults to com.ritense.<artifact>"
         }

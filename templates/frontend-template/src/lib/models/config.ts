@@ -1,9 +1,8 @@
 import {PluginConfigurationData} from '@valtimo/plugin';
 
-interface Config extends PluginConfigurationData{
+interface Config extends PluginConfigurationData {
     configurationTitle: string;
     exampleProperty: string;
-    baseUrl: string;
 }
 
 interface SampleActionConfig {

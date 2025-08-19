@@ -6,12 +6,12 @@
     } as obs"
 >
     <v-input
-            name="sampleInput"
-            [title]="'sampleInput' | pluginTranslate: pluginId | async"
-            [margin]="true"
-            [fullWidth]="true"
             [defaultValue]="obs.prefill?.sampleInput"
             [disabled]="obs.disabled"
+            [fullWidth]="true"
+            [margin]="true"
             [required]="true"
+            [title]="'sampleInput' | pluginTranslate: pluginId | async"
+            name="sampleInput"
     ></v-input>
 </v-form>
