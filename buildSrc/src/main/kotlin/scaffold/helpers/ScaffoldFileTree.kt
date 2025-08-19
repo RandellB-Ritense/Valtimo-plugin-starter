@@ -1,4 +1,4 @@
-package scaffold.utlis
+package scaffold.helpers
 
 import java.nio.file.Files
 import java.nio.file.Path

@@ -1,4 +1,4 @@
-package scaffold.utlis
+package scaffold.helpers
 
 import java.util.Locale
 
