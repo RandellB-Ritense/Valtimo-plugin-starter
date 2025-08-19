@@ -25,7 +25,7 @@ object ScaffoldPluginRegistrarBackend {
                 val indent = Regex("""\r?\n([ \t]+)""").find(inside)?.groupValues?.get(1) ?: "    "
                 val insertion = buildString {
                     if (needsComma) append(",")
-                    append("\n").append(indent).append('"').append(module).append("\",\n")
+                    append(indent).append('"').append(module).append("\",\n")
                 }
 
                 val replacement = "include(" + inside + insertion + ")"

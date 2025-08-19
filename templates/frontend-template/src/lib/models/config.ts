@@ -6,4 +6,8 @@ interface Config extends PluginConfigurationData{
     baseUrl: string;
 }
 
-export {Config};
+interface SampleActionConfig {
+    sampleInput: string;
+}
+
+export {Config, SampleActionConfig};
