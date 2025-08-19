@@ -17,7 +17,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FunctionConfigurationComponent} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, Observable, Subscription, take} from 'rxjs';
-import {SampleActionConfig} from '../../models/index.ts';
+import {SampleActionConfig} from '../../models/index';
 
 @Component({
     selector: 'sample-action',
