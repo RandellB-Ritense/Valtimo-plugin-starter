@@ -9,6 +9,7 @@ import org.gradle.api.tasks.options.Option
 import scaffold.helpers.ScaffoldFileTree
 import scaffold.helpers.TextTransform
 import java.nio.file.Files
+import kotlin.io.path.Path
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
@@ -108,7 +109,7 @@ open class ScaffoldBothTask : DefaultTask(){
         ScaffoldPluginRegistrarBackend.addBackendModule(project.layout.projectDirectory.file("settings.gradle.kts").asFile.toPath(), artifact)
 
         // Register frontend plugin
-        ScaffoldPluginRegistrarFrontend.registerAll(artifact, classPrefix, functionPrefix)
+        ScaffoldPluginRegistrarFrontend.registerFrontend(Path("frontend"), artifact, logger)
 
         logger.lifecycle("Scaffolded backend -> $backendOutput")
         logger.lifecycle("Scaffolded frontend -> $frontendOutput")
