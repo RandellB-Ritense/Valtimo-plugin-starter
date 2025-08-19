@@ -12,8 +12,8 @@ const __FUNCTION_PREFIX__PluginSpecification: PluginSpecification = {
   pluginTranslations: {
     nl: {
       configurationTitle: '__PLUGIN_NAME__',
-      configurationTitleTooltip: 'Voorbeeld plugin',
-      title: 'Voorbeeld plugin',
+      configurationTitleTooltip: 'Scaffolded __PLUGIN_NAME__ plugin',
+      title: '__PLUGIN_NAME__',
       description: 'Boilerplate plugin voor configuratie',
       exampleProperty: 'Voorbeeld eigenschap',
       baseUrl: 'Basis URL',
@@ -21,8 +21,8 @@ const __FUNCTION_PREFIX__PluginSpecification: PluginSpecification = {
     },
     en: {
       configurationTitle: '__PLUGIN_NAME__',
-      configurationTitleTooltip: 'Example plugin',
-      title: 'Example plugin',
+      configurationTitleTooltip: 'Scaffolded __PLUGIN_NAME__ plugin',
+      title: '__PLUGIN_NAME__',
       description: 'Boilerplate plugin for configuration',
       exampleProperty: 'Example property',
       baseUrl: 'Base URL',
