@@ -14,7 +14,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution
     description = "Boilerplate plugin for Valtimo"
 )
 @Suppress("UNUSED")
-class `__CLASS_PREFIX__.template` {
+class `__CLASS_PREFIX__` {
 
     @PluginProperty(key = "exampleProperty", secret = false, required = false)
     var exampleProperty: String? = null

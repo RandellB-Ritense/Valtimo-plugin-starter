@@ -1,1 +1,1 @@
-export * from './config.ts.template';
+export * from './config.ts';

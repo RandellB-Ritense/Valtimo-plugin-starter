@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.lib.json.template",
+  "extends": "./tsconfig.lib.json",
   "compilerOptions": {
     "declarationMap": false
   },

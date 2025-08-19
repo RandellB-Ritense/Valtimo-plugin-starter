@@ -6,7 +6,7 @@ dockerCompose {
     setProjectName("__ARTIFACT_NAME__")
     isRequiredBy(project.tasks.integrationTesting)
     tasks.integrationTesting {
-        useComposeFiles.addAll("$rootDir/docker-resources/docker-compose-base-test.yml", "docker-compose-override.yml.template")
+        useComposeFiles.addAll("$rootDir/docker-resources/docker-compose-base-test.yml", "docker-compose-override.yml")
     }
 }
 

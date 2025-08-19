@@ -17,12 +17,12 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FunctionConfigurationComponent} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, Observable, Subscription, take} from 'rxjs';
-import {SampleActionConfig} from '../../models/index.ts.template';
+import {SampleActionConfig} from '../../models/index.ts';
 
 @Component({
     selector: 'sample-action',
-    templateUrl: './sample-action.component.html.template',
-    styleUrls: ['./sample-action.component.scss.template']
+    templateUrl: './sample-action.component.html',
+    styleUrls: ['./sample-action.component.scss']
 })
 
 export class SampleActionComponent

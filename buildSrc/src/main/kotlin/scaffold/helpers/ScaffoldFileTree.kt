@@ -49,7 +49,7 @@ object ScaffoldFileTree {
                     dest.createDirectories()
                 } else {
                     dest.parent?.createDirectories()
-                    val isText = isTextFile(src)
+                    val isText = isTemplateFile(src)
                     if (isText) {
                         val content = src.readText()
                         val replaced = replaceTokens(content)
@@ -70,15 +70,8 @@ object ScaffoldFileTree {
         return out
     }
 
-    fun isTextFile(path: Path): Boolean {
-        val name = path.name
-        val dotIdx = name.lastIndexOf('.')
-        if (dotIdx < 0) return true
-        val ext = name.substring(dotIdx + 1).lowercase()
-        return ext in setOf(
-            "kt","kts","java","md","gradle","properties","yaml","yml","xml","json","txt","gitignore",
-            "ts","tsx","js","mjs","cjs","html","css","scss","less","env","npmrc","nvmrc","eslintrc","prettierrc","svg"
-        )
+    fun isTemplateFile(path: Path): Boolean {
+        return path.name.endsWith(".template")
     }
 
     fun stripTemplateSuffix(path: Path): Path {
