@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {PluginConfigurationComponent, PluginManagementService, PluginTranslationService} from '@valtimo/plugin';
 import {BehaviorSubject, combineLatest, map, Observable, Subscription, take} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import {Config} from "../../models/index.ts";
+import {Config} from "../../models/index";
 
 
 @Component({
