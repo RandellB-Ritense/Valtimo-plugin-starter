@@ -16,9 +16,7 @@
     "libs-publish-all": "node ./scripts/libs.publish.all.js",
     "libs:build:alfresco-auth": "ng build @valtimo-plugins/alfresco-auth",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "libs:build:made-with-ez2": "ng build @valtimo-plugins/made-with-ez2",
-    "libs:watch:made-with-ez2": "ng build @valtimo-plugins/made-with-ez2 --watch"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
