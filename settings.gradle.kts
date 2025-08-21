@@ -1,4 +1,4 @@
-rootProject.name = "Plugins"
+rootProject.name = "Valtimo-plugin-starter"
 include(
     "backend",
     "backend:app"

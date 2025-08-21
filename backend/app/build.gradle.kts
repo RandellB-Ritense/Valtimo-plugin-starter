@@ -13,7 +13,7 @@ dependencies {
         runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.105.Final:osx-aarch_64")
     }
     // Plugins
-}
+ }
 
 tasks.jar {
     enabled = false
