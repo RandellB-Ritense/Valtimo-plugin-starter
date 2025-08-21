@@ -1,1 +1,0 @@
-<b>Lastname: ${doc.lastname}, House number: ${doc.houseNumber}!</b>

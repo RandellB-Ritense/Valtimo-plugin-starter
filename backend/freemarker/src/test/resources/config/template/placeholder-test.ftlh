@@ -1,9 +1,0 @@
-${doc.lastname}
-${doc.houseNumber}
-${case.createdBy}
-${case.createdOn}
-${case.definitionId.name}
-${case.definitionId.version}
-${case.id}
-${case.sequence}
-${case.version}

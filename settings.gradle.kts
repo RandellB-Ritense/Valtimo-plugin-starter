@@ -2,27 +2,8 @@ rootProject.name = "Plugins"
 include(
     "backend",
     "backend:app",
-    "backend:alfresco-authentication",
-    "backend:amsterdam-email-api",
-    "backend:berkelybridge-textgenerator",
-    "backend:valtimo-ocr",
-    "backend:externe-klanttaak",
-    "backend:freemarker",
-    "backend:haal-centraal",
-    "backend:haal-centraal-auth",
-    "backend:mTLS-SSLContext",
-    "backend:notify-nl",
-    "backend:object-management",
-    "backend:publictask",
-    "backend:rotterdam-oracle-ebs",
-    "backend:slack",
-    "backend:smtpmail",
-    "backend:spotler",
-    "backend:suwinet",
-    "backend:xential",
-    "backend:hugging-face",
-    "backend:kvk-handelsregister",
     "frontend",
+    "backend:made-with-ez2",
 )
 
 // Background info https://github.com/gradle/gradle/issues/1697
@@ -31,8 +12,6 @@ pluginManagement {
     val springBootVersion: String by settings
     val springDependencyManagementVersion: String by settings
     val kotlinVersion: String by settings
-    val ktlintVersion: String by settings
-    val spotlessVersion: String by settings
     val dockerComposePluginVersion: String by settings
 
     plugins {
