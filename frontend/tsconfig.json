@@ -18,7 +18,8 @@
     "useDefineForClassFields" : false,
     "paths" : {
       "@src" : [ "src" ],
-      "@src/*" : [ "src/*" ]}
+      "@src/*" : [ "src/*" ],
+    }
   },
   "files" : [ ],
   "references" : [ {

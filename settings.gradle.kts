@@ -1,8 +1,8 @@
 rootProject.name = "Plugins"
 include(
     "backend",
-    "backend:app",
-    "frontend",)
+    "backend:app"
+)
 
 // Background info https://github.com/gradle/gradle/issues/1697
 pluginManagement {
