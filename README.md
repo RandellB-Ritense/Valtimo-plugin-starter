@@ -36,6 +36,8 @@ A plugin can be set up manually or by using the `EZplugin` Gradle task.
 
 To run the `EZplugin` task:
 
+The only thing you need to do is register the plugin in the ./frontend/src/app/app.module.ts file.
+
 ```bash
 ./gradlew EZplugin --name "your plugin name"
 ```
