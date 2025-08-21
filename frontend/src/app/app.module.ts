@@ -87,57 +87,9 @@ import {TaskManagementModule} from '@valtimo/task-management';
 import {ProcessLinkModule} from '@valtimo/process-link';
 import {ObjectManagementModule} from '@valtimo/object-management'
 import {ObjectModule} from "@valtimo/object";
-
-import {AlfrescoAuthPluginModule, alfrescoAuthPluginSpecification} from '@valtimo-plugins/alfresco-auth';
-import {AmsterdamEmailapiPluginModule, amsterdamEmailapiPluginSpecification} from '@valtimo-plugins/amsterdam-emailapi';
-import {
-    BerkelybridgeTextgeneratorPluginModule,
-    berkelybridgeTextgeneratorPluginSpecification
-} from '@valtimo-plugins/berkelybridge';
-import {ExterneKlanttaakPluginModule, externeKlanttaakPluginSpecification} from '@valtimo-plugins/externe-klanttaak';
-import {
-    MailTemplatePluginModule,
-    mailTemplatePluginSpecification,
-    TextTemplatePluginModule,
-    textTemplatePluginSpecification
-} from '@valtimo-plugins/freemarker';
-import {NotifyNlPluginModule, notifyNlPluginSpecification} from '@valtimo-plugins/notify-nl';
-import {ObjectManagementPluginModule, objectManagementPluginSpecification} from '@valtimo-plugins/object-management';
-import {PublictaskPluginModule, publictaskPluginSpecification} from '@valtimo-plugins/publictask';
-import {
-    RotterdamOracleEbsPluginModule,
-    rotterdamOracleEbsPluginSpecification
-} from "@valtimo-plugins/rotterdam-oracle-ebs";
-import {SlackPluginModule, slackPluginSpecification} from '@valtimo-plugins/slack';
-import {SmtpMailPluginModule, smtpmailPluginSpecification} from '@valtimo-plugins/smtpmail';
-import {SpotlerPluginModule, spotlerPluginSpecification} from '@valtimo-plugins/spotler';
-import {SuwinetPluginModule, suwinetPluginSpecification} from '@valtimo-plugins/suwinet';
-import {XentialPluginModule, XentialPluginSpecification} from '@valtimo-plugins/xential';
-import {MtlsSslcontextPluginModule, mTlsSslcontextPluginSpecification} from '@valtimo-plugins/mtls-sslcontext';
-import {HuggingFacePluginModule, huggingFacePluginSpecification} from "@valtimo-plugins/hugging-face";
-import {
-    HaalCentraalBrpAuthPluginModule,
-    haalCentraalBrpAuthPluginSpecification,
-} from "@valtimo-plugins/haal-centraal-auth";
-import {
-    HaalCentraalBrpPluginModule,
-    haalCentraalBrpPluginSpecification,
-} from "@valtimo-plugins/haal-centraal";
-import {
-    haalCentraalBagPluginSpecification
-} from "../../projects/valtimo-plugins/haal-centraal/src/lib/plugins/bag/haal-centraal-bag-plugin.specification";
-import {
-    HaalCentraalBagPluginModule
-} from "../../projects/valtimo-plugins/haal-centraal/src/lib/plugins/bag/haal-centraal-bag-plugin.module";
-
 import {LoggingModule} from '@valtimo/logging';
 import {DashboardModule} from "@valtimo/dashboard";
 import {DashboardManagementModule} from "@valtimo/dashboard-management";
-import {KvkPluginModule, kvkPluginSpecification} from "@valtimo-plugins/kvk-handelsregister";
-import {ValtimoOcrPluginModule} from "../../projects/valtimo-plugins/valtimo-ocr/src/lib/valtimo-ocr-plugin-module";
-import {
-    valtimoOcrPluginSpecification
-} from "../../projects/valtimo-plugins/valtimo-ocr/src/lib/valtimo-ocr-plugin.specification";
 
 export function tabsFactory() {
     return new Map<string, object>([
@@ -154,25 +106,6 @@ export function tabsFactory() {
     ],
     imports: [
         ValuePathSelectorComponent,
-        AlfrescoAuthPluginModule,
-        AmsterdamEmailapiPluginModule,
-        BerkelybridgeTextgeneratorPluginModule,
-        MailTemplatePluginModule,
-        TextTemplatePluginModule,
-        PublictaskPluginModule,
-        NotifyNlPluginModule,
-        ObjectManagementPluginModule,
-        ValtimoOcrPluginModule,
-        MtlsSslcontextPluginModule,
-        SlackPluginModule,
-        HuggingFacePluginModule,
-        HaalCentraalBrpPluginModule,
-        HaalCentraalBagPluginModule,
-        HaalCentraalBrpAuthPluginModule,
-        SmtpMailPluginModule,
-        SpotlerPluginModule,
-        SuwinetPluginModule,
-        XentialPluginModule,
         HttpClientModule,
         CommonModule,
         BrowserModule,
@@ -228,45 +161,13 @@ export function tabsFactory() {
         }),
         TranslationManagementModule,
         TaskManagementModule,
-        ExterneKlanttaakPluginModule,
-        RotterdamOracleEbsPluginModule,
         DashboardModule,
         DashboardManagementModule,
-        KvkPluginModule,
         ZgwModule
     ],
     providers: [{
         provide: PLUGINS_TOKEN,
         useValue: [
-            alfrescoAuthPluginSpecification,
-            amsterdamEmailapiPluginSpecification,
-            berkelybridgeTextgeneratorPluginSpecification,
-            valtimoOcrPluginSpecification,
-            externeKlanttaakPluginSpecification,
-            mailTemplatePluginSpecification,
-            notifyNlPluginSpecification,
-            haalCentraalBrpPluginSpecification,
-            haalCentraalBagPluginSpecification,
-            haalCentraalBrpAuthPluginSpecification,
-            objectManagementPluginSpecification,
-            objectTokenAuthenticationPluginSpecification,
-            objectenApiPluginSpecification,
-            objecttypenApiPluginSpecification,
-            publictaskPluginSpecification,
-            rotterdamOracleEbsPluginSpecification,
-            slackPluginSpecification,
-            huggingFacePluginSpecification,
-            smtpmailPluginSpecification,
-            spotlerPluginSpecification,
-            suwinetPluginSpecification,
-            textTemplatePluginSpecification,
-            mTlsSslcontextPluginSpecification,
-            XentialPluginSpecification,
-            kvkPluginSpecification,
-            catalogiApiPluginSpecification,
-            documentenApiPluginSpecification,
-            openZaakPluginSpecification,
-            zakenApiPluginSpecification
         ]
     }],
     bootstrap: [AppComponent]

@@ -57,7 +57,7 @@ object ScaffoldPluginRegistrarFrontend {
         require(Files.exists(tsconfigPath)) { "tsconfig.json not found in $frontendRoot" }
 
         val raw = tsconfigPath.readText()
-        val root = mapper.readTree(raw) as ObjectNode
+        val root = mapper.readTree(sanitizeJson(raw)) as ObjectNode
 
         val compilerOptions = (root.get("compilerOptions") as? ObjectNode)
             ?: root.putObject("compilerOptions")
@@ -172,6 +172,16 @@ object ScaffoldPluginRegistrarFrontend {
         } else {
             logger.lifecycle(output.trim().ifEmpty { args.joinToString(" ") })
         }
+    }
+
+    private fun sanitizeJson(raw: String): String {
+        // Remove // line comments
+        var s = raw.replace(Regex("(?m)//.*$"), "")
+        // Remove /* block */ comments
+        s = s.replace(Regex("/\\*.*?\\*/", RegexOption.DOT_MATCHES_ALL), "")
+        // Remove trailing commas before } or ]
+        s = s.replace(Regex(",\\s*([}\\]])"), "$1")
+        return s
     }
 
     private fun isWindows(): Boolean =

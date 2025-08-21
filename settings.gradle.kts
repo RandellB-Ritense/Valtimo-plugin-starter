@@ -2,9 +2,7 @@ rootProject.name = "Plugins"
 include(
     "backend",
     "backend:app",
-    "frontend",
-    "backend:made-with-ez2",
-)
+    "frontend",)
 
 // Background info https://github.com/gradle/gradle/issues/1697
 pluginManagement {

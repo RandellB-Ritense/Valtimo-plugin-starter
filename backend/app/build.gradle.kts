@@ -13,8 +13,6 @@ dependencies {
         runtimeOnly("io.netty:netty-resolver-dns-native-macos:4.1.105.Final:osx-aarch_64")
     }
     // Plugins
-
-    implementation(project(":backend:made-with-ez2"))
 }
 
 tasks.jar {
