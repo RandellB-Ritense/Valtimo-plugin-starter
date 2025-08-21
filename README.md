@@ -1,7 +1,53 @@
-# Valtimo plugin starter
+# Valtimo Plugin Starter
 
-Plugins offers optional functionality to the GZAC platform. For installation and configuration tips, look [here](https://docs.valtimo.nl/features/plugins/configure-plugin)
+The **Valtimo Plugin Starter** provides an empty, ready-to-use Valtimo instance for developing **Valtimo/GZAC plugins**.
 
-- npm install
-- ng serve (start frontend)
-- ./gradlew backend/app/bootRun (start backend)
+## Getting Started
+
+1. Rename your project in `./settings.gradle.kts`:
+
+   ```kotlin
+   rootProject.name = "New Plugin Name"
+   ```
+
+2. Install frontend dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the frontend:
+
+   ```bash
+   ng serve
+   ```
+
+4. Start the backend:
+
+   ```bash
+   ./gradlew :app:backend:bootRun
+   ```
+
+This will also spin up a **Docker Compose** environment with the required containers.
+
+## Setting Up a Plugin
+
+A plugin can be set up manually or by using the `EZplugin` Gradle task.
+
+To run the `EZplugin` task:
+
+```bash
+./gradlew EZplugin --name "your plugin name"
+```
+
+This will automatically build a basic working plugin and auto-register the module in both the frontend and backend. After building, it should be visible once you restart the frontend and backend.
+
+### Keycloak users
+
+The example application has a few test users that are preconfigured.
+
+| Name | Role | Username | Password |
+|---|---|---|---|
+| James Vance | ROLE_USER | user | user |
+| Asha Miller | ROLE_ADMIN | admin | admin |
+| Morgan Finch | ROLE_DEVELOPER | developer | developer |
