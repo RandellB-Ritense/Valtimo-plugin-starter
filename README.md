@@ -4,6 +4,8 @@ The **Valtimo Plugin Starter** provides an empty, ready-to-use Valtimo instance 
 
 ## Getting Started
 
+Fork this project and clone it to your local machine.
+
 1. Rename your project in `./settings.gradle.kts`:
 
    ```kotlin
