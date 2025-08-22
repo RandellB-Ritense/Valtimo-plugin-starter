@@ -45,7 +45,7 @@ subprojects {
     if (project.path.startsWith(":backend")) {
 
         tasks.withType<org.springframework.boot.gradle.tasks.run.BootRun> {
-            mainClass.set("com.ritense.plugin.sandbox.PluginApplication")
+            mainClass.set("com.ritense.valtimoplugins.sandbox.PluginApplication")
         }
         apply(plugin = "java")
         apply(plugin = "org.springframework.boot")

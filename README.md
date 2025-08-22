@@ -26,7 +26,7 @@ The **Valtimo Plugin Starter** provides an empty, ready-to-use Valtimo instance 
 4. Start the backend:
 
    ```bash
-   ./gradlew :app:backend:bootRun
+   ./gradlew backend:app:bootRun
    ```
 
 This will also spin up a **Docker Compose** environment with the required containers.
