@@ -107,17 +107,8 @@ subprojects {
         dockerCompose {
             projectNamePrefix = "example-"
             setProjectName("${rootProject.name}-${project.name}")
-
-            // If you use Compose V2 (most setups today):
-            // run "docker compose ..." via the docker CLI
             executable = dockerPath
             dockerExecutable = dockerPath
-            // If your plugin exposes this flag, keep it on:
-            // useComposeV2.set(true)
-
-            // If you’re still on Compose V1, switch to:
-            // executable = composeV1Path
-            // dockerExecutable = dockerPath
         }
 
         tasks.test {

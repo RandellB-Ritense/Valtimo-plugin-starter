@@ -22,7 +22,7 @@ Fork this project and clone it to your local machine.
 3. Start the frontend:
 
    ```bash
-   ng serve
+   npm start
    ```
 
 4. Start the backend:
