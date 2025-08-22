@@ -13,6 +13,7 @@ The **Valtimo Plugin Starter** provides an empty, ready-to-use Valtimo instance 
 2. Install frontend dependencies:
 
    ```bash
+   cd ./frontend
    npm install
    ```
 
