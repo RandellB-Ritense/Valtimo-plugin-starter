@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ritense.plugin.sandbox
+package com.ritense.valtimoplugins.sandbox
 
 import java.net.InetAddress
 import io.github.oshai.kotlinlogging.KotlinLogging

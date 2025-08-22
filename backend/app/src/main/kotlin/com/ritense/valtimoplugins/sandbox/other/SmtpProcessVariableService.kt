@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.ritense.plugin.sandbox.other
+package com.ritense.valtimoplugins.sandbox.other
 
 import com.ritense.resource.domain.MetadataType
 import com.ritense.resource.service.TemporaryResourceStorageService
