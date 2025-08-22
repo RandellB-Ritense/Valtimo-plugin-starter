@@ -83,14 +83,41 @@ subprojects {
             withJavadocJar()
         }
 
-        if (Os.isFamily(FAMILY_MAC)) {
-            println("Configure docker compose for macOs")
-            dockerCompose {
-                projectNamePrefix = "example-"
-                setProjectName("${rootProject.name}-${project.name}")
-                executable = "/usr/local/bin/docker-compose"
-                dockerExecutable = "/usr/local/bin/docker"
-            }
+        fun findFirstExecutable(vararg candidates: String): String =
+            candidates.firstOrNull { File(it).canExecute() } ?: candidates.last()
+
+        val dockerPath = findFirstExecutable(
+            // macOS (Intel Docker Desktop or Homebrew)
+            "/usr/local/bin/docker",
+            // macOS (Apple Silicon Homebrew)
+            "/opt/homebrew/bin/docker",
+            // Linux
+            "/usr/bin/docker",
+            // Fallback to PATH lookup
+            "docker"
+        )
+
+        val composeV1Path = findFirstExecutable(
+            "/usr/local/bin/docker-compose",
+            "/opt/homebrew/bin/docker-compose",
+            "/usr/bin/docker-compose",
+            "docker-compose"
+        )
+
+        dockerCompose {
+            projectNamePrefix = "example-"
+            setProjectName("${rootProject.name}-${project.name}")
+
+            // If you use Compose V2 (most setups today):
+            // run "docker compose ..." via the docker CLI
+            executable = dockerPath
+            dockerExecutable = dockerPath
+            // If your plugin exposes this flag, keep it on:
+            // useComposeV2.set(true)
+
+            // If you’re still on Compose V1, switch to:
+            // executable = composeV1Path
+            // dockerExecutable = dockerPath
         }
 
         tasks.test {
