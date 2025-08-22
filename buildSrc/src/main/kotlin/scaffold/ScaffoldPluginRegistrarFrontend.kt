@@ -17,7 +17,6 @@ object ScaffoldPluginRegistrarFrontend {
 
     fun registerFrontend(frontendRoot: Path, artifactName: String, logger: Logger) {
         addScripts(frontendRoot, artifactName, logger)
-        addDevDependency(frontendRoot, artifactName, logger)
         addTsconfigPath(frontendRoot, artifactName, logger)
         addAngularProject(frontendRoot, artifactName, logger)
     }
