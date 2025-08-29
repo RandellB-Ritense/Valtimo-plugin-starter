@@ -109,6 +109,7 @@ subprojects {
             setProjectName("${rootProject.name}-${project.name}")
             executable = dockerPath
             dockerExecutable = dockerPath
+            removeVolumes.set(false)
         }
 
         tasks.test {
